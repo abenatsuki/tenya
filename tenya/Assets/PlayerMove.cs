@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    public Transform explosionPrefab;
+   
     Rigidbody pRigidBody;
-    Collider collider;
+    BoxCollider collider;
+    [SerializeField]
+    float speed;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,10 +19,16 @@ public class PlayerMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKey(KeyCode.A))
-        pRigidBody.AddForce(new Vector3(-10f, 0, 0));
+        if (Input.GetKey(KeyCode.A))
+        {
+          pRigidBody.AddForce(new Vector3(-10f, 0, 0));
+        }
+            
         if (Input.GetKey(KeyCode.D))
+        {
             pRigidBody.AddForce(new Vector3(10f, 0, 0));
+        }
+            
 
        // collider.transform.posi = new Vector3(0,0,1);
     }
@@ -28,7 +36,11 @@ public class PlayerMove : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
        
-        pRigidBody.AddForce(new Vector3(0, 500, 0));
+        pRigidBody.AddForce(new Vector3(0, speed, 0));
+    }
+    void changeCollider()
+    {
+        collider.size = new Vector3(10, 10, 10);
     }
 }
 
